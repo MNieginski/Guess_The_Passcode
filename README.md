@@ -1,4 +1,8 @@
-# Project-one-game
+# Guess_The_Passcode
+
+### Langueges Used
+
+This game project is made using a combination of HTML, CSS, and Javascript
 
 ### 1. Goal and Functionality
 
