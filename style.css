@@ -1,0 +1,60 @@
+h1 {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid black;
+}
+
+button {
+    height: 100px;
+    width: 100px;
+    font-size: 55px;
+}
+
+.main-container {
+    position: relative;
+    
+}
+
+.numGuessLeft {
+    background-color: aqua;
+    padding: 10px;
+    width: 200px;
+    margin-left: auto;
+}
+
+.guess-screen {
+    position: relative;
+    text-align: center;
+    font-size: 55px;
+    background-color: rgb(78, 206, 78);
+    top: 40px;
+    padding-bottom: 10px;
+    height: 70px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    align-content: center;
+    gap: 30px 100px;
+    background-color: lightgray;
+    margin-top: -40px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 120px;
+    padding-bottom: 20px;
+    width: 50%;
+   
+}
+
+#enter {
+    font-size: 30px;
+}
+
+#delete {
+    font-size: 30px;
+}
