@@ -3,11 +3,17 @@ console.log("js: loaded")
 
 /////////////////////////////////////////// Define Varables
 let passcode = [];
+
 let guessCode = [];
+let startArray= ["_", "_", "_", "_" ]
 
 let guessCounter
 
 let numGuesses;
+
+let crntSpot = 0
+
+let btnNum
 
 // Elements
 
@@ -16,7 +22,9 @@ const guessScrnEl = document.querySelector(".guess-screen")
 const gameBtnEls = document.querySelector(".btn-container");
 //console.log(gameBtnEls)
 
-const pEl = document.querySelector("p").innerHTML= "_ _ _ _"
+let pEl = document.querySelector("p").innerHTML = startArray
+
+
 // console.log(pEl.innerHTML)
 
 // Initialization
@@ -29,15 +37,16 @@ function init(){
 }
 init()
 
-// Clicking
+/////////////////////// Clicking
 
 function passcodeEnter(){
     for(let i = 0; i < gameBtnEls.length; i++){
        gameBtnEls[i].onclick=function(){
            //console.log("it worked!")
-           let btnNum = gameBtnEls[i].innerHTML
-           console.log(btnNum)
-           } 
+           btnNum = gameBtnEls[i].innerHTML
+          // console.log(btnNum)
+
+        } 
        } 
 }
 
@@ -46,7 +55,16 @@ gameBtnEls.addEventListener('click', (e) => {
     // console.log(e.target.innerText)
     guessCode.push(e.target.innerText)
     console.log("Here is players guess: ", guessCode)
-    let guessCodeStr = guessCode.toString()
+    //let guessCodeStr = guessCode.toString()
+    startArray.splice(crntSpot, 1)
+    startArray.splice(crntSpot, 0, e.target.innerText)
+    document.querySelector("p").innerHTML = startArray
+    crntSpot = crntSpot + 1
+    if (crntSpot >= 4){
+        startArray.pop(e.target.innerText)
+    }
+    // console.log(crntSpot)
+    // console.log(startArray)
 })
 
 
@@ -76,9 +94,9 @@ function passcodeGen() {
     passcode = Array.from({
         length: 4
     }, () => Math.floor(Math.random() * 10))
-    console.log(passcode)
+    //console.log(passcode)
     let passcodeStr = passcode.toString()
-    console.log(passcodeStr)
+    //console.log(passcodeStr)
 }
 
 
