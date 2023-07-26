@@ -18,7 +18,7 @@ let crntSpot = 0
 
 let btnNum
 
-let timerValue = 60; // timer starting value
+let timerValue = 60; // timer starting value (60 seconds)
 let timer
 
 // Elements
@@ -88,10 +88,10 @@ function render() {
    // changes the number on the page, to match the new timerValue value as it updates
   }
 
-// function gameOver(){
-//     alert(`Maximum qttempts reached, game over!`)
-//     Location.reload()
-// }
+function gameOver(){
+    alert(`You ran out of time!`)
+    location.reload()
+}
 
 ///////////////////////////////////////////// Other functions
 
@@ -103,32 +103,22 @@ function passcodeGen() {
 }
 
 function handleBtnClick() {
-    console.log("starting timer");
     startBtnEl.setAttribute("disabled", "true");
-    timer = setInterval(decrementCount, INTERVAL); // 1.
+    timer = setInterval(decrementCount, INTERVAL);
   }
 
   function decrementCount() {
     if (timerValue > 0) {
       timerValue--;
-      console.log(timerValue);
-      render();
+      render(); 
     } else {
-      console.log("stopping timer");
-      resetClock();
+        gameOver() // calls for an end game
+        resetClock() // without this, game never resets
     }
-    // if value is >0 -> continue to decrement
-    // else resetClock
   }
 
   function resetClock() {
-    clearInterval(timer); // 2.
-    setTimeout(() => {
-      timerValue = 10;
-      timer = null;
-      startBtnEl.removeAttribute("disabled");
-      render();
-    }, 1000);
+    clearInterval(timer)
   }
 
 function deleteDigit(){
@@ -143,4 +133,3 @@ function compareCode(){
         startArray = ["_", "_", "_", "_"]
     }
 }
-
