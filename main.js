@@ -3,7 +3,7 @@ let passcode = [];
 let passcodeStr
 
 let guessCode = [];
-let startArray = ["_", "_", "_", "_" ]
+let startArray = ["_", "_", "_", "_"]
 let finalArray
 
 let guessCounter
@@ -97,13 +97,15 @@ function passcodeGen() {
 }
 
 function deleteDigit(){
-    
+
 }
 
 function compareCode(){
     if(startArray.toString() === passcode.toString()){
         alert(`Congrats, you won!`)
         location.reload()        
+    } else {
+        startArray = ["_", "_", "_", "_"]
     }
 }
 
