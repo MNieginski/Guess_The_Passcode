@@ -1,11 +1,10 @@
-console.log("js: loaded")
-// Define Constants
-
-/////////////////////////////////////////// Define Varables
+////////////////////////////////////////// Define Varables
 let passcode = [];
+let passcodeStr
 
 let guessCode = [];
-let startArray= ["_", "_", "_", "_" ]
+let startArray = ["_", "_", "_", "_" ]
+let finalArray
 
 let guessCounter
 
@@ -20,12 +19,11 @@ let btnNum
 const guessScrnEl = document.querySelector(".guess-screen")
 
 const gameBtnEls = document.querySelector(".btn-container");
-//console.log(gameBtnEls)
+const enterEl = document.querySelector("#enter");
+const deleteEl = document.querySelector("#delete")
+
 
 let pEl = document.querySelector("p").innerHTML = startArray
-
-
-// console.log(pEl.innerHTML)
 
 // Initialization
 function init(){
@@ -34,59 +32,60 @@ function init(){
     passcodeGen()
     passcodeEnter()
     
+    
 }
 init()
 
-/////////////////////// Clicking
+///////////////////////////////////////////////////////// Clicking
 
 function passcodeEnter(){
     for(let i = 0; i < gameBtnEls.length; i++){
        gameBtnEls[i].onclick=function(){
-           //console.log("it worked!")
            btnNum = gameBtnEls[i].innerHTML
-          // console.log(btnNum)
-
         } 
        } 
 }
 
 gameBtnEls.addEventListener('click', (e) => {
-    // Check what we got:
-    // console.log(e.target.innerText)
     guessCode.push(e.target.innerText)
-    console.log("Here is players guess: ", guessCode)
-    //let guessCodeStr = guessCode.toString()
+
     startArray.splice(crntSpot, 1)
     startArray.splice(crntSpot, 0, e.target.innerText)
+
     document.querySelector("p").innerHTML = startArray
     crntSpot = crntSpot + 1
+    
     if (crntSpot >= 4){
-        startArray.pop(e.target.innerText)
+        //startArray.pop(e.target.innerText)
     }
-    // console.log(crntSpot)
-    // console.log(startArray)
+    
 })
 
+enterEl.addEventListener('click', (e) => {
+    compareCode()
+})
+
+deleteEl.addEventListener('click', (e) => {
+    deleteDigit()
+})
 
 ///////////////////////////////////////////// Start/Restart game
 
-function runGame(){
-    if(numGuesses > 5){
-         gameOver()
-     } else if(numGuesses <=5 && numGuesses >= 1){
-        alert(`Wrong passcode, try again`)
-     } else {
-         alert(`Please enter passcode`)
-     }
+// function runGame(){
+//     if(numGuesses > 5){
+//          gameOver()
+//      } else if(numGuesses <=5 && numGuesses >= 1){
+//         alert(`Wrong passcode, try again`)
+//      } else {
+//          alert(`Please enter passcode`)
+//      }
      
-}
+// }
 
-function gameOver(){
-    alert(`Maximum qttempts reached, game over!`)
-    Location.reload()
-}
-
-//runGame()
+// function gameOver(){
+//     alert(`Maximum qttempts reached, game over!`)
+//     Location.reload()
+// }
 
 /////////////////////////////////////////// other functions
 
@@ -94,16 +93,17 @@ function passcodeGen() {
     passcode = Array.from({
         length: 4
     }, () => Math.floor(Math.random() * 10))
-    //console.log(passcode)
-    let passcodeStr = passcode.toString()
-    //console.log(passcodeStr)
+    console.log(passcode)
 }
 
-
+function deleteDigit(){
+    
+}
 
 function compareCode(){
-    if(guessCodeStr === passcodeStr){
+    if(startArray.toString() === passcode.toString()){
         alert(`Congrats, you won!`)
-        Location.reload()
+        location.reload()        
     }
 }
+
