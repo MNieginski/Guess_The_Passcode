@@ -1,3 +1,7 @@
+////////////////////////////////////////// Constants
+
+const INTERVAL = 1000; //one seccond
+
 ////////////////////////////////////////// Define Varables
 let passcode = [];
 let passcodeStr
@@ -14,6 +18,9 @@ let crntSpot = 0
 
 let btnNum
 
+let timerValue = 60; // timer starting value
+let timer
+
 // Elements
 
 const guessScrnEl = document.querySelector(".guess-screen")
@@ -24,6 +31,9 @@ const deleteEl = document.querySelector("#delete")
 
 
 let pEl = document.querySelector("p").innerHTML = startArray
+
+const timerDisplayEl = document.querySelector("#timerDisplay");
+const startBtnEl = document.querySelector("#start");
 
 // Initialization
 function init(){
@@ -42,7 +52,7 @@ function passcodeEnter(){
     for(let i = 0; i < gameBtnEls.length; i++){
        gameBtnEls[i].onclick=function(){
            btnNum = gameBtnEls[i].innerHTML
-        } 
+        }
        } 
 }
 
@@ -69,25 +79,21 @@ deleteEl.addEventListener('click', (e) => {
     deleteDigit()
 })
 
+startBtnEl.addEventListener("click", handleBtnClick);
+
 ///////////////////////////////////////////// Start/Restart game
 
-// function runGame(){
-//     if(numGuesses > 5){
-//          gameOver()
-//      } else if(numGuesses <=5 && numGuesses >= 1){
-//         alert(`Wrong passcode, try again`)
-//      } else {
-//          alert(`Please enter passcode`)
-//      }
-     
-// }
+function render() {
+   timerDisplayEl.textContent = timerValue;
+   // changes the number on the page, to match the new timerValue value as it updates
+  }
 
 // function gameOver(){
 //     alert(`Maximum qttempts reached, game over!`)
 //     Location.reload()
 // }
 
-/////////////////////////////////////////// other functions
+///////////////////////////////////////////// Other functions
 
 function passcodeGen() {
     passcode = Array.from({
@@ -95,6 +101,35 @@ function passcodeGen() {
     }, () => Math.floor(Math.random() * 10))
     console.log(passcode)
 }
+
+function handleBtnClick() {
+    console.log("starting timer");
+    startBtnEl.setAttribute("disabled", "true");
+    timer = setInterval(decrementCount, INTERVAL); // 1.
+  }
+
+  function decrementCount() {
+    if (timerValue > 0) {
+      timerValue--;
+      console.log(timerValue);
+      render();
+    } else {
+      console.log("stopping timer");
+      resetClock();
+    }
+    // if value is >0 -> continue to decrement
+    // else resetClock
+  }
+
+  function resetClock() {
+    clearInterval(timer); // 2.
+    setTimeout(() => {
+      timerValue = 10;
+      timer = null;
+      startBtnEl.removeAttribute("disabled");
+      render();
+    }, 1000);
+  }
 
 function deleteDigit(){
 

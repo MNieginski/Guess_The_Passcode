@@ -11,13 +11,16 @@
 <body>
     <header>
         <h1>Guess The Passcode</h1>
+        <h3>You have 60 secconds to guess the password!</h3>
+        <h4>Press Start to begin!</h4>
     </header>
 
     <main class="main-container">
-        <section class="numGuessLeft">
-            <h2>Number of guesses left: </h2>
+        <section class="timeLeft">
+            <h2 id="timerDisplay">60</h2>
         </section>
-        
+        <button id="start">Start Game</button>
+
         <section class="guess-screen">
             <p></p>
         </section>
