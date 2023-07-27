@@ -1,6 +1,6 @@
 ////////////////////////////////////////// Constants
 
-const INTERVAL = 1000; //one seccond
+const INTERVAL = 200; //one seccond
 
 ////////////////////////////////////////// Define Varables
 let passcode = [];
@@ -10,10 +10,6 @@ let guessCode = [];
 let startArray = ["_", "_", "_", "_"]
 let finalArray
 
-// let guessCounter = 0
-
-// let numGuesses;
-
 let crntSpot = 0
 
 let btnNum
@@ -21,12 +17,13 @@ let btnNum
 let timerValue = 60; // timer starting value (60 seconds)
 let timer
 
+let notification
+
 // Elements
 
 const guessScrnEl = document.querySelector(".guess-screen")
 
 const gameBtnEls = document.querySelectorAll(".num");
-// let gameBtnEls = document.getElementsByClassName('.num');
 const enterEl = document.querySelector("#enter");
 const deleteEl = document.querySelector("#delete")
 
@@ -45,13 +42,13 @@ init()
 
 ///////////////////////////////////////////////////////// Clicking
 
-function passcodeEnter(){
-    for(let i = 0; i < gameBtnEls.length; i++){
-       gameBtnEls[i].onclick=function(){
-           btnNum = gameBtnEls[i].innerHTML
-        }
-       } 
-}
+// function passcodeEnter(){
+//     for(let i = 0; i < gameBtnEls.length; i++){
+//        gameBtnEls[i].onclick=function(){
+//            btnNum = gameBtnEls[i].innerHTML
+//         }
+//        } 
+// }
 
 for (let i =0; i < gameBtnEls.length; i++){
 gameBtnEls[i].addEventListener('click', (e) => {
@@ -65,7 +62,6 @@ gameBtnEls[i].addEventListener('click', (e) => {
 
     document.querySelector("p").innerHTML = startArray
     crntSpot = crntSpot + 1
-    //guessCounter++ 
     }   
     })
 }
@@ -91,7 +87,7 @@ function handleBtnClick() {
 function startGame(){
     //console.log("Game Started!")
     decrementCount()
-    passcodeEnter()
+    //passcodeEnter()
 }
 
 function render() {
@@ -100,8 +96,9 @@ function render() {
   }
 
 function gameOver(){
-    alert(`You ran out of time!`)
-    location.reload()
+    notification = document.querySelector('p').innerHTML = "Passcode Denied!"
+    resetClock()
+    //location.reload()
 }
 
 function resetClock() {
@@ -136,8 +133,9 @@ function deleteDigit(){
 
 function compareCode(){
     if(startArray.toString() === passcode.toString()){
-        alert(`Congrats, you won!`)
-        location.reload()        
+        notification = document.querySelector('p').innerHTML = "Passcode Accepted!"
+        resetClock()
+        //location.reload()        
     } else {
         crntSpot = 0
         startArray = ["_", "_", "_", "_"]
