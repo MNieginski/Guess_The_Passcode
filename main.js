@@ -1,6 +1,6 @@
 ////////////////////////////////////////// Constants
 
-const INTERVAL = 200; //one seccond
+const INTERVAL = 1000; //one seccond
 
 ////////////////////////////////////////// Define Varables
 let passcode = [];
