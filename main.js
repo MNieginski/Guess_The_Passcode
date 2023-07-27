@@ -10,7 +10,7 @@ let guessCode = [];
 let startArray = ["_", "_", "_", "_"]
 let finalArray
 
-let guessCounter
+let guessCounter = 0
 
 let numGuesses;
 
@@ -25,9 +25,11 @@ let timer
 
 const guessScrnEl = document.querySelector(".guess-screen")
 
-const gameBtnEls = document.querySelector(".btn-container");
+const gameBtnEls = document.querySelectorAll(".num");
+// let gameBtnEls = document.getElementsByClassName('.num');
 const enterEl = document.querySelector("#enter");
 const deleteEl = document.querySelector("#delete")
+
 
 
 let pEl = document.querySelector("p").innerHTML = startArray
@@ -37,12 +39,7 @@ const startBtnEl = document.querySelector("#start");
 
 // Initialization
 function init(){
-    console.log("Game Started!")
-
     passcodeGen()
-    passcodeEnter()
-    
-    
 }
 init()
 
@@ -56,7 +53,11 @@ function passcodeEnter(){
        } 
 }
 
-gameBtnEls.addEventListener('click', (e) => {
+for (let i =0; i < gameBtnEls.length; i++){
+gameBtnEls[i].addEventListener('click', (e) => {
+   if (crntSpot >= 4){
+        return
+    } else {
     guessCode.push(e.target.innerText)
 
     startArray.splice(crntSpot, 1)
@@ -64,12 +65,10 @@ gameBtnEls.addEventListener('click', (e) => {
 
     document.querySelector("p").innerHTML = startArray
     crntSpot = crntSpot + 1
-    
-    if (crntSpot >= 4){
-        //startArray.pop(e.target.innerText)
-    }
-    
-})
+    guessCounter++
+    }   
+    })
+}
 
 enterEl.addEventListener('click', (e) => {
     compareCode()
@@ -81,7 +80,19 @@ deleteEl.addEventListener('click', (e) => {
 
 startBtnEl.addEventListener("click", handleBtnClick);
 
+function handleBtnClick() {
+    startBtnEl.setAttribute("disabled", "true");
+    timer = setInterval(startGame, INTERVAL);
+  }
+
+
 ///////////////////////////////////////////// Start/Restart game
+
+function startGame(){
+    //console.log("Game Started!")
+    decrementCount()
+    passcodeEnter()
+}
 
 function render() {
    timerDisplayEl.textContent = timerValue;
@@ -93,6 +104,9 @@ function gameOver(){
     location.reload()
 }
 
+function resetClock() {
+    clearInterval(timer)
+  }
 ///////////////////////////////////////////// Other functions
 
 function passcodeGen() {
@@ -101,11 +115,6 @@ function passcodeGen() {
     }, () => Math.floor(Math.random() * 10))
     console.log(passcode)
 }
-
-function handleBtnClick() {
-    startBtnEl.setAttribute("disabled", "true");
-    timer = setInterval(decrementCount, INTERVAL);
-  }
 
   function decrementCount() {
     if (timerValue > 0) {
@@ -117,9 +126,7 @@ function handleBtnClick() {
     }
   }
 
-  function resetClock() {
-    clearInterval(timer)
-  }
+
 
 function deleteDigit(){
 
