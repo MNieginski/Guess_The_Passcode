@@ -10,9 +10,9 @@ let guessCode = [];
 let startArray = ["_", "_", "_", "_"]
 let finalArray
 
-let guessCounter = 0
+// let guessCounter = 0
 
-let numGuesses;
+// let numGuesses;
 
 let crntSpot = 0
 
@@ -65,7 +65,7 @@ gameBtnEls[i].addEventListener('click', (e) => {
 
     document.querySelector("p").innerHTML = startArray
     crntSpot = crntSpot + 1
-    guessCounter++
+    //guessCounter++ 
     }   
     })
 }
@@ -129,7 +129,9 @@ function passcodeGen() {
 
 
 function deleteDigit(){
-
+    startArray.splice(crntSpot -1, 1, "_")
+    crntSpot = crntSpot - 1
+    document.querySelector("p").innerHTML = startArray
 }
 
 function compareCode(){
@@ -137,6 +139,8 @@ function compareCode(){
         alert(`Congrats, you won!`)
         location.reload()        
     } else {
+        crntSpot = 0
         startArray = ["_", "_", "_", "_"]
+        document.querySelector("p").innerHTML = startArray
     }
 }
