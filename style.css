@@ -1,8 +1,13 @@
+body {
+    background-image: url("../assets/brickWallP1.jpg")
+}
+
 header {
     text-align: center;
     padding: 20px;
     border: 1px solid black;
     padding: 0;
+    background-color: white;
 }
 h1{
     text-decoration-line: underline;
@@ -29,7 +34,7 @@ button {
     height: 80px;
     width: 300px;
     font-size: 40px;
-    background-color: rgb(255, 88, 88);
+    background-color: aqua;
 }
 
 .main-container {
