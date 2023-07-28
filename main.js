@@ -42,13 +42,6 @@ init()
 
 ///////////////////////////////////////////////////////// Clicking
 
-// function passcodeEnter(){
-//     for(let i = 0; i < gameBtnEls.length; i++){
-//        gameBtnEls[i].onclick=function(){
-//            btnNum = gameBtnEls[i].innerHTML
-//         }
-//        } 
-// }
 
 for (let i =0; i < gameBtnEls.length; i++){
 gameBtnEls[i].addEventListener('click', (e) => {
