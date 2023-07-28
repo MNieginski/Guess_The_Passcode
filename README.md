@@ -2,7 +2,7 @@
 
 ### Screenshot
 
-![](..assets/P1Capture.png)
+![](assets/P1Capture.png)
 
 ### Langueges Used
 
